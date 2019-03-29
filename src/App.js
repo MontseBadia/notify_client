@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Note from './components/Note';
+import axios from 'axios';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      notes: []
+    };
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/notes.json')
+    .then(response => {
+      this.setState({
+        notes: response.data
+      })
+      console.log(this.state.notes)
+    })
+    .catch(error => console.log(error))
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <h1>NOTES LIST</h1>
+        <ul>
+          {this.state.notes.map( (note, index) => (
+            <li key={index}><Note note={note.title} text={note.text} /></li>
+          ))}
+        </ul>
       </div>
     );
   }

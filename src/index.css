@@ -12,3 +12,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* NOTE */
+
+.note-container {
+  width: 200px;
+  height: 200px;
+  border: 1px solid blue;
+  padding: 20px;
+  margin: 20px
+}
