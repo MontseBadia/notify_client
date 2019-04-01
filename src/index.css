@@ -16,9 +16,13 @@ code {
 /* NOTE */
 
 .note-container {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border: 1px solid blue;
   padding: 20px;
   margin: 20px
+}
+
+.flex {
+  display: flex;
 }
