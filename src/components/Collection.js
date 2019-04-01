@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import Note from './Note';
 
 class Collection extends Component {
-  render() { 
-    return ( 
+  render() {
+    return (
       <div>
-      <h1>NOTES LIST</h1>
-      <ul>
-        {this.props.notes.map( (note, index) => (
-          <li key={index}><Note note={note.title} text={note.text} /></li>
-        ))}
-      </ul>
-    </div>
+        <h1 className="title">NOTES LIST</h1>
+        <ul>
+          {this.props.notes.map((note, index) => (
+            <li className="li" key={index}><Note note={note.title} text={note.text} id={note.id} deleteNote={this.props.deleteNote} /></li>
+          ))}
+        </ul>
+      </div>
     );
   }
 }
- 
+
 export default Collection;

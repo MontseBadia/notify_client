@@ -11,25 +11,41 @@ class App extends Component {
 
   componentDidMount() {
     axios.get('http://localhost:5000/notes.json')
-    .then(response => {
-      this.setState({
-        notes: response.data
+      .then(response => {
+        this.setState({
+          notes: response.data
+        })
+        // console.log(this.state.notes)
       })
-      // console.log(this.state.notes)
-    })
-    .catch(error => console.log(error))
+      .catch(error => console.log(error))
   }
 
   createNote = note => {
     const notes = [...this.state.notes]
     notes.push(note)
-    this.setState({notes})
+    this.setState({ notes })
+  }
+
+  deleteNote = id => {
+    axios.delete(`http://localhost:5000/notes/${id}`)
+      .then(response => {
+        if (response.status === 204) {
+          const notes = [...this.state.notes]
+          const updatedNotes = notes.filter((note) => {
+            return note.id !== id;
+          });
+          this.setState({
+            notes: updatedNotes
+          })
+        }
+      })
+      .catch(error => console.log(error))
   }
 
   render() {
     return (
       <div className="flex">
-        <div><Collection notes={this.state.notes} /></div>
+        <div><Collection notes={this.state.notes} deleteNote={this.deleteNote} /></div>
         <div><Information createNote={this.createNote} /></div>
       </div>
     );

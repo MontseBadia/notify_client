@@ -26,3 +26,15 @@ code {
 .flex {
   display: flex;
 }
+
+.form {
+  margin: 80px;
+}
+
+.li{
+  list-style-type: none;
+}
+
+.title{
+  margin-left: 65px;
+}

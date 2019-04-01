@@ -19,21 +19,22 @@ class CreateForm extends Component {
         title: this.state.title,
         text: this.state.content
       }
-    }).then( response => {
+    }).then(response => {
       // console.log(response.data)
       this.props.createNote(response.data);
-    }).catch( error => console.log(error));
+    }).catch(error => console.log(error));
+    // e.currentTarget.reset()
   };
 
-  render() { 
-    return ( 
-      <form onSubmit={this.createNote}>
-        <input name="title" type="text" placeholder="Title" value={this.state.title} onChange={e => this.setState({ title: e.target.value })}/>
-        <input name="content" type="text" placeholder="Content" value={this.state.content} onChange={e => this.setState({ content: e.target.value})}/>
+  render() {
+    return (
+      <form className="form" onSubmit={this.createNote}>
+        <input name="title" type="text" placeholder="Title" value={this.state.title} onChange={e => this.setState({ title: e.target.value })} /><br />
+        <input name="content" type="text" placeholder="Content" value={this.state.content} onChange={e => this.setState({ content: e.target.value })} /><br />
         <button type="submit">Create Note</button>
       </form>
-     );
+    );
   }
 }
- 
+
 export default CreateForm;
