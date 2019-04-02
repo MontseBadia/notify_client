@@ -42,10 +42,22 @@ class App extends Component {
       .catch(error => console.log(error))
   }
 
+  search = input => {
+    console.log(this.state.notes)
+    const notes = [...this.state.notes]
+    const updatedNotes = []
+    updatedNotes.push(notes.find((note) => {
+      return note.title.includes(input) || note.text.includes(input)
+    }))
+    this.setState({
+      notes: updatedNotes
+    })
+  }
+
   render() {
     return (
       <div className="flex">
-        <div><Collection notes={this.state.notes} deleteNote={this.deleteNote} /></div>
+        <div><Collection notes={this.state.notes} deleteNote={this.deleteNote} search={this.search} /></div>
         <div><Information createNote={this.createNote} /></div>
       </div>
     );
