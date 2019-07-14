@@ -9,7 +9,7 @@ class CreateForm extends Component {
       content: ''
     }
 
-    this.createNote = this.createNote.bind(this)
+    // this.createNote = this.createNote.bind(this)
   }
 
   createNote = (e) => {
@@ -22,15 +22,27 @@ class CreateForm extends Component {
     }).then(response => {
       // console.log(response.data)
       this.props.createNote(response.data);
+      this.setState({
+        title: '',
+        content: ''
+      })
     }).catch(error => console.log(error));
     // e.currentTarget.reset()
   };
 
-  render() {
+  handleChange = (key) => {
+    return (e) => {
+      this.setState({[key]: e.target.value});
+    }
+  }
+
+  render() {  
+    const { title, content } = this.state;
+
     return (
       <form className="form" onSubmit={this.createNote}>
-        <input name="title" type="text" placeholder="Title" value={this.state.title} onChange={e => this.setState({ title: e.target.value })} /><br />
-        <input name="content" type="text" placeholder="Content" value={this.state.content} onChange={e => this.setState({ content: e.target.value })} /><br />
+        <input name="title" type="text" placeholder="Title" value={title} onChange={this.handleChange('title')} /><br />
+        <input name="content" type="text" placeholder="Content" value={content} onChange={this.handleChange('content')} /><br />
         <button type="submit">Create Note</button>
       </form>
     );
